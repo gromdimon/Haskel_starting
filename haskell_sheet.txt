@@ -1,0 +1,17 @@
+Generally compile haskell file:
+ghc main.hs
+
+Run programm after compilation:
+./main
+
+Run file without compilation:
+runghc main.hs
+runhaskell main.hs
+
+Interactive environment:
+ghci
+:l main -- Compile file in ghci
+:r -- Recompile
+:t sqrt -- Get information about function
+:quit
+
