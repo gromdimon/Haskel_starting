@@ -14,4 +14,3 @@ ghci
 :r -- Recompile
 :t sqrt -- Get information about function
 :quit
-
