@@ -96,3 +96,48 @@ wat_int 2 = 0.01
 wat_int 1 = 0.1
 wat_int x = 0 -- or wat_int _ = 0
 
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+
+isodd n
+    | n `mod` 2 == 0 = False
+    | otherwise = True
+-- Alternative way is "iseven n = n `mod` 2 == 0"
+
+what_day :: Int -> String
+what_day day
+    | (day > 4) && (day < 8) = "between 4 and 8"
+    | (day > 8) && (day < 19) = "between 8 and 19"
+    | otherwise = "Idk what do you ask"
+
+distance_numbers :: Double -> Double -> String
+distance_numbers a b
+    | dist < 10 = "Distance is less, than 10"
+    | dist <= 25 = "Ditance is less, than 25"
+    | dist <= 100 = "Dist <= 100"
+    | otherwise = "IDK"
+    where dist = (a + b) / 2
+
+{- Features with functions-}
+times4 :: Int -> Int
+times4 x = x * 4
+list_t4 = map times4 [1,2,3,4,5] -- Using map for implementation of function
+
+mult_4 :: [Int] -> [Int]
+mult_4 [] = []
+mult_4 (1_el, other_el) = times4 1_el : mult_4 other_el
+-- Implement func for 1_el and then apply rekursion for other_el
+
+perfect_match :: [Char] -> [Char] -> Bool
+perfect_match [] [] = True
+perfect_match (x:xs) (y:ys) = x == y && perfect_match xs ys
+perfect_match _ _ = False
+
+mult_2 = map (\x -> x * 2) [1..10] --Lambda
+
+{- Operators -}
+double_even_num x
+    if (x `mod` 2 /= 0)
+        then x
+        else x * 2
