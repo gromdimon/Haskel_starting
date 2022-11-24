@@ -141,3 +141,43 @@ double_even_num x
     if (x `mod` 2 /= 0)
         then x
         else x * 2
+
+say_hello = do
+    putStrLn "What is your name?"
+    name <- getLine
+    putStrLn $ Hello ++ name
+
+{-Classes-}
+data Customer = Customer String Num
+    deriving Show
+tomSmith :: Customer
+tomSmith = Customer Tom 12
+get_num_customer :: Customer -> Int
+get_num_customer (Customer _ num) = num
+
+data RPS = Rock | Paper | Scissors
+shoot :: RPS -> RPS -> String
+shoot Paper Rock = "Paper win Rock"
+shoot Paper Scissors = "Scissors win Paper"
+shoot _ _ = "I have not defined it"
+
+data Employee = Employee {
+                          name :: String,
+                          position :: String,
+                          age :: Int
+                          } deriving (Eq, Show)
+Sam = Employee {name = "Sam", position = "Manager", age = 22}
+Ann = Employee {name = "Ann", position = "Developer", age = 23}
+sam_data = show Sam
+
+{-Opening files-}
+writetofile do
+    file <- openFile "file.txt" WriteMode
+    hPutStrLn file ("Some text here")
+    hClose file
+
+readfromfile do
+    file_r <- openFile "file.txt" ReadMode
+    contents <- hGetContents file_r
+    putStr contents
+    hClose file_r
