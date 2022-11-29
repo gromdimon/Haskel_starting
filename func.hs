@@ -1,4 +1,11 @@
 -- This are different methods of building functions
+-- Functionality of funcs
+{-
+Voraussetzung:              y /= 0
+Ergebnis:                   Teilen x durch y
+Funktionssignatur:          teilen :: Float -> Float -> Float
+Definintion:                teilen x y = x/y
+-}
 
 
 -- Pattern matching

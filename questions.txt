@@ -3,13 +3,7 @@
 -- Is it possible to show bigger floats as Double in Haskell?
 
 
-{-
-Funktionen
-Voraussetzung:              y /= 0
-Ergebnis:                   Teilen x durch y
-Funktionssignatur:          teilen :: Float -> Float -> Float
-Definintion:                teilen x y = x/y
--}
+
 
 
 enthaeltZiffer :: Int -> Int -> Bool
