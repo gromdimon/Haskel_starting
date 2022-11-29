@@ -78,10 +78,12 @@ tuple_zip = zip names nums
 {-Functions-}
 get_tripple x = x*3 -- in ghci write "let get_tripple x = x*3"
 
-{-main do
+{-
+main do
     putStrLn "What's your age?"
     age <- getLine
-    putStrLn ("You are" ++ age ++ "y.o.")-}
+    putStrLn ("You are" ++ age ++ "y.o.")
+-}
 
 addMe :: Int -> Int -> Int
 -- funcname param1 param2 = operations (returned val)

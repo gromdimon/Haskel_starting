@@ -1,0 +1,18 @@
+-- First q, why do we use "module Datentypen where" at the beginning
+-- Why do I have ghci name in Terminal, when I load file
+-- Is it possible to show bigger floats as Double in Haskell?
+
+
+{-
+Funktionen
+Voraussetzung:              y /= 0
+Ergebnis:                   Teilen x durch y
+Funktionssignatur:          teilen :: Float -> Float -> Float
+Definintion:                teilen x y = x/y
+-}
+
+
+enthaeltZiffer :: Int -> Int -> Bool
+enthaeltZiffer z n
+    | 0 <= n && n <= 9 = n==z
+    | otherwise = z == n`mod`10 || enthaeltZiffer z (n`div`10)
