@@ -3,4 +3,3 @@ git status
 git add .
 git commit -m "message"
 git push origin master
-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
