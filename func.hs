@@ -30,6 +30,14 @@ bmiTell weight height
           normal = 25.0
           fat = 30.0
 
+-- Vor.: keine
+-- Erg.: True ist genau dann geliefert, wenn xs das Element y enthält.
+enthaelt :: Eq a => a -> [a] -> Bool
+enthaelt y [] = False -- y ist nicht in der leeren Listen
+enthaelt y (x:xs)
+    | y == x = True -- 1. Fall y ist genau der Kopf der Liste
+    | otherwise = enthaelt y xs -- 2. Fall y ist evtl. woanders
+    
 
 -- Let <definitions> in <expression>
 cylinder :: (RealFloat a) => a -> a -> a

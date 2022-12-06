@@ -41,18 +41,27 @@ inkrement = (+1)
 -- Erg.: True ist genau dann geliefert, wenn f angewendet auf x >= 3 ist.
 test :: (a -> Integer) -> a -> Bool -- Die Klammern in der Signatur sind wichtig!!
 test f x = (f x >= 3)
+{- Tests:
+test inkrement 2 liefert True
+test (div 2) 4 liefert False
+-}
 
 -- Vor.: keine
 -- Erg.: Die 2-fache Komposition der Eingabefunktion ist geliefert.
 twice :: (a -> a) -> a -> a
 twice f = f.f
 
--- (.) ist die Komposition von Funktionen
--- Es gilt: (f.g) x = f (g x)
+{- Tests:
+(.) ist die Komposition von Funktionen
+Es gilt: (f.g) x = f (g x)
+-}
 
 -- ... und was macht diese Funktion?
 caesar :: Char -> Char
 caesar = chr.(+3).ord
+{-Tests:
+
+-}
 
 -- Wichtige Funktionen Höherer Ordnung----------------------------------
 

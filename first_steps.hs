@@ -41,6 +41,7 @@ even_more = 2 : more_prime
 fav_nums = 2 : 7 : 21 : 66 :[]
 multilist = [[1,2,3],[4,5,6]]
 len_list = length prime_num
+onlysechs = drop 5 [1..6]
 rev_list = reverse prime_num
 is_empty_list = null prime_num
 second_elem = prime_num !! 1
