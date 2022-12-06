@@ -1,6 +1,0 @@
-git branch -a
-git status
-git add .
-git commit -m "message"
-git pull remotes/origin/master
-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
