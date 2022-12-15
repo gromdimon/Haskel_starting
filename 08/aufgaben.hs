@@ -126,7 +126,8 @@ was die Funktion foo macht.
 -}
 -- Voraussetzung: Liste
 -- Ergebnis: Liste mit applied Funktion
--- Signatur: (Foldable t => (c -> a -> c)) -> (b -> a -> c) -> [a] -> [b] -> [c]
+-- Signatur foldl :: Foldable t => (b -> a -> b) -> b -> t a -> b
+-- Signatur flip :: (a -> b -> c) -> b -> a -> c
 foo :: [a] -> [a]
 foo xs = foldl (flip (:)) [] xs 
 {-
@@ -198,14 +199,14 @@ test liste
     | mergesort liste == trisort liste = ”Korrekt” 
     | otherwise = ”Nicht korrekt”-}
 
+
 --Voraussetzung: Liste
---Ergebnis: Liste mit Trisort
+--Ergebnis: Sortierte Liste
 triSort :: Ord a => [a] -> [a]
 triSort [] = []
 triSort [x] = [x]
-triSort [x,y] = [x,y]
-triSort xs = merge (mergeSort ys) (mergeSort zs)
-    where (ys,zs) = split xs
+triSort xs = merge (merge (mergeSort first) (mergeSort second)) (insertSort third)
+        where (first, second, third) = split xs
 
 --Voraussetzung: Liste
 --Ergebnis: Liste in drei Teillisten geteilt
@@ -214,30 +215,14 @@ split xs = (take n xs, take m (drop n xs), drop m (drop n xs))
     where n = length xs `div` 3
           m = length xs `div` 3 + n
 
--- Vor.: keine
--- Erg.: Eine Liste, welche die Eingabeliste aufsteigend sortiert hat,
---       ist geliefert.
-insertSort :: Ord a => [a] -> [a]
-insertSort [] = []
-insertSort (x:xs) = insert x (insertSort xs)
-
--- Vor.: Die Eingabeliste ist aufsteigend sortiert.
--- Erg.: Eine Liste, welche das einzelne Element y an der richtigen
---       Stelle der Eingabeliste enthält, ist geliefert.
-insert :: Ord a => a -> [a] -> [a]
-insert y [] = [y]
-insert y (x:xs)
-     | x < y = x : insert y xs -- 1. Fall: Stelle noch nicht gefunden
-     | otherwise = y : x : xs -- 2. Fall: Stelle gefunden
-
-
+--  COPY FROM LEKTURES
 -- Vor.: keine
 -- Erg.: Eine Liste, welche die Eingabeliste aufsteigend sortiert hat,
 --       ist geliefert.
 mergeSort :: Ord a => [a] -> [a]
 mergeSort [] = []
 mergeSort [x] = [x]
-mergeSort xs = merge (mergeSort links) (mergeSort rechts)  
+mergeSort xs = merge (mergeSort links) (mergeSort rechts)
          where (links,rechts) = halbiere xs
 
 -- Vor.: keine
@@ -259,7 +244,29 @@ merge (x:xs) (y:ys)
      | x < y = x : merge xs (y:ys)
      | otherwise = y : merge (x:xs) ys
 
+-- Vor.: keine
+-- Erg.: Eine Liste, welche die Eingabeliste aufsteigend sortiert hat,
+--       ist geliefert.
+insertSort :: Ord a => [a] -> [a]
+insertSort [] = []
+insertSort (x:xs) = insert x (insertSort xs)
 
+-- Vor.: Die Eingabeliste ist aufsteigend sortiert.
+-- Erg.: Eine Liste, welche das einzelne Element y an der richtigen
+--       Stelle der Eingabeliste enthält, ist geliefert.
+insert :: Ord a => a -> [a] -> [a]
+insert y [] = [y]
+insert y (x:xs)
+     | x < y = x : insert y xs -- 1. Fall: Stelle noch nicht gefunden
+     | otherwise = y : x : xs -- 2. Fall: Stelle gefunden
+
+
+{- Tests:
+> triSort [2,3,547,1,8,23,5,9,0,3]
+[0,1,2,3,3,5,8,9,23,547]
+> triSort [9,8,7,6,5,4,3,2]
+[2,3,4,5,6,7,8,9]
+-}
 
 {-(d) Der Sortieralgorithmus selectsort funktioniert nach dem Prinzip Smart-Choice- &-Stupid-Insertion:
 (i) Finde, merke und entferne ein gro ̈ßtes Element der Liste.
