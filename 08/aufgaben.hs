@@ -277,15 +277,44 @@ type Tabelle = [ Eintrag ]
 Implementiere selectsort :: Tabelle -> Tabelle, welche eine Tabelle mit Eintra ̈gen bekommt 
 und die Eintra ̈ge absteigend nach Int-Wert sortierst Nutze dazu 1.c) und 2.a)-}
 
---Voraussetzung: Tabelle
---Ergebnis: Tabelle sortiert
---selectsort :: Tabelle -> Tabelle
---selectsort [] = []
---selectsort xs = (maxEintrag xs) : selectsort (remove (maxEintrag xs) xs)
+--Voraussetzung: Liste
+--Ergebnis: Sortierte Liste
+selectSort :: Tabelle -> Tabelle
+selectSort [] = []
+selectSort xs = maxElem xs : selectSort (delete (maxElem xs) xs)
+
+--Voraussetzung: Liste
+--Ergebnis: Groesstes Element der Liste
+maxElem :: Tabelle -> Eintrag
+maxElem [x] = x
+maxElem (x:xs)
+    | snd x > snd (maxEintrag xs) = x
+    | otherwise = maxEintrag xs
+
+--Voraussetzung: Liste
+--Ergebnis: Liste ohne das erste Vorkommen von x
+delete :: Eintrag -> Tabelle -> Tabelle
+delete x [] = []
+delete x (y:ys)
+    | x == y = ys
+    | otherwise = y : delete x ys
+
+{- Tests:
+> selectSort [('a',2), ('c',3), ('d',6)]
+[('d',6),('c',3),('a',2)]
+> selectSort [('a',2), ('c',3), ('d',6), ('g',1922), ('k', 1)]
+[('g',1922),('d',6),('c',3),('a',2),('k',1)]-}
+
 
 
 {-(e) Analysiere die Laufzeit von Selectsort. Fu ̈r die Laufzeit sollen die Vergleiche geza ̈hlt werden, 
 die in der maxEintrag-Funktion auftauchen. (Je nachdem, wie ihr diese implementiert, kann ein Vergleich
 auch dem Aufruf der Funktion max entsprechen.)-}
 
-
+{-
+Ich schreibe das, wenn ich sehr stark schlafen moechte, aber ich versuche es trotzdem.
+Die Laufzeit von Selectsort ist (n^2), da die Funktion maxElem in jedem Schritt n-mal aufgerufen wird.
+Dabei wird in jeder Iteration die Funktion delete aufgerufen, die n-mal aufgerufen wird.
+Somit ist die Laufzeit (n^2).
+Danke)
+-}
