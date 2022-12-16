@@ -4,6 +4,7 @@
 module Aacht where 
 -- import Sortieren
 
+import Data.Char
 
 -- 1. <Hier witzigen Aufgabentitel einfu ̈gen>
 {-(a) Recherchiere die Funktionen foldr, foldl, foldr1 und foldl1. Erkla ̈re ihre Funktionsweise 
@@ -70,9 +71,10 @@ dez2bin f num = dez2bin f (num `div` 2) ++ f (num `mod` 2)
 
 --Voraussetzung: Immer intToChar Funktion angeben und ganzes Binaerzahl
 --Ergebnis: Binärzahl in eine Dezimalzahl umgewandelt
-bin2dez :: Int -> Int
-bin2dez 0 = 0
-bin2dez x = 2*bin2dez (x `div` 10) + (x `mod` 10)
+bin2dez :: String -> Int
+bin2dez [] = 0
+bin2dez xs = foldl1 f (map (0-48+) (map (ord) xs)) where
+        f p x = x + (p*2)
 -- Wenn es wichtig ist String am Ende zu haben, verwende intToChar Funktion auf Ergebnis!
 
 
