@@ -1,4 +1,4 @@
---Aufgebenblatt 7 zur Einheit 07: Listen
+--Aufgebenblatt 8 zur Einheit 08
 --Hramyka, D. und Tiesler, A. Tutorium: Do.8-10 mit Manuel Zschäbitz 
 -- 14.12.22
 module Aacht where 
