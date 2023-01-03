@@ -1,7 +1,8 @@
 module Neun where
 
 
-{- Input: natu ̈rliche Zahl n ∈ N0
+-- Aufgabe 1
+{- (a) Input: natu ̈rliche Zahl n ∈ N0
 Output: Anzahl der Nullen der Bina ̈rdarstellung von n -}
 
 anzahl :: Int -> Int
@@ -80,3 +81,26 @@ binTodez (x:xs)
 > binTodez "1110"
 14
 -}
+
+
+
+-- Aufgabe 2
+{- Mithilfe der ZF-Notation ist es mo ̈glich, in Haskell Listen generieren zu lassen. Die ZF-Notation (benannt nach Zermelo und
+Fraenkel) stammt aus der axiomatischen Mengen- lehre. Zum Beispiel ist {3 · n | n ∈ {1, . . . , 100}, n gerade} die Menge aller
+Elemente 3 · n, wobei n aus der Menge {1, . . . , 100} kommt und gerade ist. In Haskell kann man schreiben:
+[ 3*x | x <- [1..100], even x]. Hierbei handelt es sich um die Liste aller Elemente 3*x wobei x aus der urspru ̈nglichen Liste
+[1..100] kommt und gerade ist.
+Allgemein sehen Listengeneratoren folgendermaßen aus: Sei xs::[a] eine Liste, f::a->b eine Funktion und p::a->Bool ein Pra ̈dikat.
+[ f x | x <- xs, p x] ist die Liste aller f x, wobei x aus der Liste xs entstammt und die Bedingung p erfu ̈llt.
+Hinweis: Man beachte aber, dass es sich bei dem mathematischen Begriff der Menge um eine ungeordnete Struktur handelt, wa ̈hrend
+die Elemente in Listen natu ̈rlich eine Reihenfolge haben.
+(a) Gib 3 spannende Haskellausdru ̈cke an, in denen ZF-Notation vorkommt. Gib au- ßerdem jeweils den Wert und Typ dieser Ausdru ̈cke
+an. Mindestens einer der Aus- dru ̈cke muss den Typ Char besitzen. -}
+
+
+
+
+
+{-
+(d) Implementiere eine Funktion zfElem, die pru ̈ft, ob ein Element in einer Liste ent- halten ist.
+Die Funktion soll ZF-Notation sowie foldl verwenden. -}
