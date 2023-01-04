@@ -1,25 +1,30 @@
 module Neun where
+import Data.Char
 
 
 -- Aufgabe 1
 {- (a) Input: natu ̈rliche Zahl n ∈ N0
 Output: Anzahl der Nullen der Bina ̈rdarstellung von n -}
 
+-- Funktion liefert anzahl der Nullen in Binardarstellung davon
 anzahl :: Int -> Int
 anzahl x
     | x < 0 = error"Plese enter positive value"
     | otherwise = anzahlNullen (decimalBinar x)
 
+-- Funktion liefert anzahl der Char `0` in String
 anzahlNullen :: String -> Int
 anzahlNullen [] = 0
 anzahlNullen (x:xs)
     | x == '0' = 1 + anzahlNullen xs
     | otherwise = anzahlNullen xs
 
+-- Funktion wandelt decimal Zahl in Binaer String um
 decimalBinar :: Int -> String
 decimalBinar 0 = ""
 decimalBinar num = decimalBinar (num `div` 2) ++ intToChar (num `mod` 2)
 
+-- Funktion mapt Ziffer zu Char
 intToChar :: Int -> String
 intToChar x
     | x == 0 = ['0']
@@ -52,6 +57,15 @@ intToChar x
 {- (c) Input: Nicht-leere Bina ̈rsequenz (d.h. eine Zeichenkette bestehend aus Nullen und Einsen)
 Output: Dezimalzahl (Int), welche durch die Bina ̈rsequenz dargestellt ist -}
 
+-- Funktion wandelt Binaer String in decimal Int
+binTodez :: String -> Int
+binTodez [] = error"Give a proper binary number"
+binTodez (x:xs)
+    | xs == [] && x == '0' = 0
+    | xs == [] && x == '1' = 1
+    | otherwise = ((charToint x) * 2 ^ length xs) + binTodez xs
+
+-- Funktion mapt Ziffer Char zu Int
 charToint :: Char -> Int
 charToint x
     | x == '0' = 0
@@ -66,13 +80,6 @@ charToint x
     | x == '9' = 9
     | otherwise = error"IDK"
 
-binTodez :: String -> Int
-binTodez [] = error"Give a proper binary number"
-binTodez (x:xs)
-    | xs == [] && x == '0' = 0
-    | xs == [] && x == '1' = 1
-    | otherwise = ((charToint x) * 2 ^ length xs) + binTodez xs
-
 {- Tests:
 > binTodez "000"
 0
@@ -81,6 +88,7 @@ binTodez (x:xs)
 > binTodez "1110"
 14
 -}
+
 
 
 
@@ -97,10 +105,34 @@ die Elemente in Listen natu ̈rlich eine Reihenfolge haben.
 (a) Gib 3 spannende Haskellausdru ̈cke an, in denen ZF-Notation vorkommt. Gib au- ßerdem jeweils den Wert und Typ dieser Ausdru ̈cke
 an. Mindestens einer der Aus- dru ̈cke muss den Typ Char besitzen. -}
 
-
-
-
-
+-- Alle Ausdruecke sind Listen, in zweitem Ausdrueck erscheint Char
+erstes = [a ^ a | a <- [0 .. 10], a`mod`2 == 0]
+zweites = [ord x | x <- "string", x /= 'g']
+drittes = [2 * g | g <- [ord x | x <- "string", x == 'g'], g >= 3]
 {-
-(d) Implementiere eine Funktion zfElem, die pru ̈ft, ob ein Element in einer Liste ent- halten ist.
+> erstes
+[1,4,256,46656,16777216,10000000000]
+> zweites
+[115,116,114,105,110]
+> drittes
+[206]
+-}
+
+
+
+{- (d) Implementiere eine Funktion zfElem, die pru ̈ft, ob ein Element in einer Liste ent- halten ist.
 Die Funktion soll ZF-Notation sowie foldl verwenden. -}
+
+-- Funktion entspricht der Aufgabe
+-- `\` bedeutet Lambda funktion, aehnlich zu `lambda acc x = acc || x == elem`
+zfElem :: Eq a => a -> [a] -> Bool
+zfElem elem lst = foldl (\acc x -> acc || x == elem) False lst
+
+{- Tests:
+> zfElem 1 [1,2,3,4]
+True
+> zfElem 'a' "abdfaradzf"
+True
+> zfElem True [True, False, False]
+True
+-}
