@@ -6,6 +6,27 @@ import Data.Char
 {- (a) Input: natu ̈rliche Zahl n ∈ N0
 Output: Anzahl der Nullen der Bina ̈rdarstellung von n -}
 
+-- Shorted version of next functions
+-- Make steps of division by 2 and akkumulating current value of number of 0
+anznull :: Int -> Int -> Int
+anznull anz 0 = anz
+anznull anz 1 = anz
+anznull anz num = anznull (anz + val) (num `div` 2)
+    where val = case (num `mod` 2) of 0 -> 1
+                                      1 -> 0
+{- Tests:
+> anznull 0 8
+3
+> anznull 0 80
+5
+> anznull 0 88
+4
+> anznull 0 0
+0
+> anznull 0 245932670
+13
+-}
+
 -- Funktion liefert anzahl der Nullen in Binardarstellung davon
 anzahl :: Int -> Int
 anzahl x
