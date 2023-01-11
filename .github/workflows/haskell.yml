@@ -34,4 +34,8 @@ jobs:
           ${{ runner.os }}-
 
     - name: Try to compile
-      run: ghci :l 10/aufgaben.hs
+      run: |
+        for dir in 06 07 08 09 10; do
+          echo "Loading file $dir/aufgaben.hs"
+          ghci -fno-code ":l $dir/aufgaben.hs"
+        done
