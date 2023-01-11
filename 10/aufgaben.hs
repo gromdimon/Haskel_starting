@@ -164,10 +164,22 @@ welche die Vereinigung und den Schnitt zweier Mengen darstellen. Die Funktionen 
 und elem ko ̈nnen hier helfen.
 -}
 
-unionn :: Eq a => Menge a -> Menge a -> Menge a
-unionn (Menge xs) (Menge ys) = vonListe (inList xs ys)
-        where
-            inList [] _ = []
-            inList (x:xs) ys 
-                | x `elem` ys = x : inList xs ys
-                | otherwise = inList xs ys
+union' :: Eq a => Menge a -> Menge a -> Menge a
+union' (Menge xs) (Menge ys) = vonListe (nub (xs ++ ys))
+
+intersection' :: Eq a => Menge a -> Menge a -> Menge a
+intersection' (Menge xs) (Menge ys) = vonListe (filter (`elem` ys) xs)
+
+
+{- Tests:
+ghci> union' m1 m2
+{1,2,3}
+ghci> intersection' m1 m2
+{2}
+ghci> intersection' m1 (Menge [2,3,4])
+{2}
+ghci> intersection' (Menge [1,2,3,4,5,6,7]) (Menge [2,3,4])
+{2,3,4}
+ghci> union' (Menge [1,2,3,4,5,6,7]) (Menge [2,3,4])
+{1,2,3,4,5,6,7}
+-}
