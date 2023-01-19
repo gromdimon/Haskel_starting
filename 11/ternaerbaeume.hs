@@ -80,14 +80,22 @@ baum = Node 12
 
 --ab hier kommt euer Code
 --hoehe :: TerTree -> Int
-
+hoehe Leaf = 0
+hoehe (Node _ Leaf Leaf Leaf) = 1
+hoehe (Node _ lub mub rub) = max (1 + hoehe lub) (max (1 + hoehe mub) (1 + hoehe rub))
+-- baum = 5
 
 --innereKnoten :: TerTree -> Int
-
+innereKnoten Leaf = 0
+innereKnoten (Node _ lub mub rub) = 1 + innereKnoten lub + innereKnoten mub + innereKnoten rub
+-- baum = 16
 
 --blaetter :: TerTree -> Int
-
+blaetter Leaf = 1
+blaetter (Node _ lub mub rub) = blaetter lub + blaetter mub + blaetter rub
+-- baum = 33
 
 --suchen :: Int -> TerTree -> Bool
-
-
+suchen num Leaf = False
+suchen num (Node x lub mub rub) = num == x || suchen num lub || suchen num mub || suchen num rub
+-- funct)
